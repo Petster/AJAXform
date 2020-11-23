@@ -34,86 +34,100 @@
     </div>
     <div class="row">
       <div class="col-5 mx-auto text-center">
-        <div id="formSuccess" class="hidden">
-          <h3>Form Successfully Submitted</h3>
-          <hr />
-          <p>Response Code: <output id="status"></output></p>
-          <p>Flower: <output id="subFlower"></output></p>
-          <p>Domain: <output id="subDomain"></output></p>
-          <p>Number: <output id="subNumber"></output></p>
-          <p>Colors: <output id="subColors"></output></p>
-          <p>Story: <output id="subStory"></output></p>
-        </div>
-        <div id="formBorder" class="mx-auto ">
-        <form id="questionForm" class="text-center" action="https://www.nashuaweb.net/submit-json.php" method="post" novalidate>
-          <h3 id="formFail" class="hidden">You are missing Required Fields!</h3>
-          <progress id="progbar" value="0" max="4"></progress>
-          <fieldset>
-            <legend>Questionnaire <small>* = required</small></legend>
-            <div class="row text-left">
-              <div class="col">
-                <div class="block">
-                  <label for="flower">Flower*</label>
-                  <input class="form-control" required type="text" id="flower" name="flower" pattern="[^0-9]{4,64}$" title="Only Words containing 3 to 64 letters are allowed" placeholder="Rose">
-                  <br><span id="flowerError" class="hidden">Please Enter a Flower name with at least 4 characters. No Numbers</span>
-                </div>
-                <div class="block cb">
-                  <label>Option <input type="checkbox" id="option" name="option"></label>
-                </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Form Successfully Submitted</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-              <div class="col">
-                <div class="block">
-                  <label for="colors">Colors*</label>
-                  <select class="colors" id="colors" data-placeholder="Choose some colors" multiple name="colors[]" required title="Select Atleast 1 Color">
-                    <option value="red">red</option>
-                    <option value="blue">blue</option>
-                    <option value="yellow">yellow</option>
-                    <option value="orange">orange</option>
-                    <option value="white">white</option>
-                    <option value="pink">pink</option>
-                    <option value="purple">purple</option>
-                  </select>
-                  <br><span id="colorsError" class="hidden">Please choose at least 1 color.</span>
-                </div>
+              <div class="modal-body">
+                <p>Response Code: <output id="status"></output></p>
+                <p>Flower: <output id="subFlower"></output></p>
+                <p>Domain: <output id="subDomain"></output></p>
+                <p>Number: <output id="subNumber"></output></p>
+                <p>Colors: <output id="subColors"></output></p>
+                <p>Story: <output id="subStory"></output></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="modalClose" data-dismiss="modal">Finish</button>
               </div>
             </div>
-            <div class="row text-left">
-              <div class="col">
-                <div class="block">
-                  <label for="domain">Domain</label>
-                  <input class="form-control" type="text" id="domain" title="Only URLs Are Accepted, http:// Not Allowed" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" name="domain"
-                    placeholder="www.example.com">
-                  <br><span id="domainError" class="hidden">Please Enter a Valid URL starting with www</span>
-                </div>
-              </div>
-              <div class="col">
-                <div class="block">
-                  <label for="number">Number*</label>
-                  <input class="form-control" required type="number" id="quantity" name="quantity" min="0" max="131" pattern="/d" title="Enter a Number Between 0 and 131">
-                  <br><span id="quantityError" class="hidden">Please Enter a Number between 0 and 131</span>
-                </div>
-              </div>
-            </div>
-            <div class="block rb">
-              <label>Answer</label>
-              <label><input type="radio" name="rb-answer" value="no" checked>No</label>
-              <label><input type="radio" name="rb-answer" value="maybe">Maybe</label>
-              <label><input type="radio" name="rb-answer" value="yes">Yes</label>
-            </div>
-            <div class="block text-left">
-              <label for="story" class="d-inline-block w-100">Story*</label>
-              <textarea minlength="5" required="" id="story" title="Please write a story that is atleast 5 letters long" name="story" class="storyAccept"></textarea>
-               <span id="storyCount" class=""><output id="char-count">0</output>/100</span>
-
-              <span id="storyError" class="hidden">Please write a story with at least 5 letters.</span>
-            </div>
-          </fieldset>
-          <div class="buttons">
-            <button id="subbtn" class="btn btn-primary border border-secondary" type="button">Go</button>
-            <button id="resbtn" class="btn btn-danger border border-secondary" type="reset">Reset</button>
           </div>
-        </form>
-      </div>
+        </div>
+
+        <div id="formBorder" class="mx-auto ">
+          <form id="questionForm" class="text-center" action="https://www.nashuaweb.net/submit-json.php" method="post" novalidate>
+            <h3 id="formFail" class="hidden">You are missing Required Fields!</h3>
+            <progress id="progbar" value="0" max="5"></progress>
+            <fieldset>
+              <legend>Questionnaire <small>* = required</small></legend>
+              <div class="row text-left">
+                <div class="col">
+                  <div class="block">
+                    <label for="flower">Flower*</label>
+                    <input class="form-control" required type="text" id="flower" name="flower" pattern="[^0-9]{4,64}$" title="Only Words containing 3 to 64 letters are allowed" placeholder="Rose">
+                    <br><span id="flowerError" class="hidden">Please Enter a Flower name with at least 4 characters. No Numbers</span>
+                  </div>
+                  <div class="block cb">
+                    <label>Option <input type="checkbox" id="option" name="option"></label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="block">
+                    <label for="colors">Colors*</label>
+                    <select class="colors" id="colors" data-placeholder="Choose some colors" multiple name="colors[]" required title="Select Atleast 1 Color">
+                      <option value="red">red</option>
+                      <option value="blue">blue</option>
+                      <option value="yellow">yellow</option>
+                      <option value="orange">orange</option>
+                      <option value="white">white</option>
+                      <option value="pink">pink</option>
+                      <option value="purple">purple</option>
+                    </select>
+                    <br><span id="colorsError" class="hidden">Please choose at least 1 color.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row text-left">
+                <div class="col">
+                  <div class="block">
+                    <label for="domain">Domain</label>
+                    <input required class="form-control" type="text" id="domain" title="Only URLs Are Accepted, http:// Not Allowed"
+                      pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" name="domain" placeholder="www.example.com">
+                    <br><span id="domainError" class="hidden">Please Enter a Valid URL starting with www</span>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="block">
+                    <label for="number">Number*</label>
+                    <input class="form-control" required type="number" id="quantity" name="quantity" min="0" max="131" pattern="/d" title="Enter a Number Between 0 and 131">
+                    <br><span id="quantityError" class="hidden">Please Enter a Number between 0 and 131</span>
+                  </div>
+                </div>
+              </div>
+              <div class="block rb">
+                <label>Answer</label>
+                <label><input type="radio" name="rb-answer" value="no" checked>No</label>
+                <label><input type="radio" name="rb-answer" value="maybe">Maybe</label>
+                <label><input type="radio" name="rb-answer" value="yes">Yes</label>
+              </div>
+              <div class="block text-left">
+                <label for="story" class="d-inline-block w-100">Story*</label>
+                <textarea minlength="5" required="" id="story" title="Please write a story that is atleast 5 letters long" name="story" class="storyAccept"></textarea>
+                <span id="storyCount" class=""><output id="char-count">0</output>/100</span>
+
+                <span id="storyError" class="hidden">Please write a story with at least 5 letters.</span>
+              </div>
+            </fieldset>
+            <div class="buttons">
+              <button id="subbtn" class="btn btn-primary border border-secondary" type="button">Go</button>
+              <button id="resbtn" class="btn btn-danger border border-secondary" type="reset">Reset</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </section>
@@ -122,4 +136,5 @@
   <script src="js/main.js"></script>
   <script src="js/formValid.js"></script>
 </body>
+
 </html>

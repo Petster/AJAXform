@@ -1,3 +1,4 @@
+//sidebar script
 let sideHide = true;
 
 function toggleSidebar() {

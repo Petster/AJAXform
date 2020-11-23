@@ -6,7 +6,6 @@ let resbtn = document.getElementById("resbtn");
 let prog = document.getElementById("progbar");
 let charCount = document.getElementById("char-count");
 let keypresses = 0;
-let numValid = 0; //progress amount
 let data = {}; //json data
 let validInput = {
   flower: false,
@@ -29,105 +28,86 @@ let colArr = [];
 form.addEventListener("change", formChangeCheck);
 
 //WORD COUNT
-document.getElementById("story").addEventListener("input", storyCount);
+inputList[4].addEventListener("input", storyCount);
 
-//SUBMISSION
+//SUBMISSION submit the form
 btn.addEventListener("click", submit);
 
-//RESET BUTTON
+//RESET BUTTON reset the form
 resbtn.addEventListener("click", reset);
 
+//MODAL CLOSE to reset the form and reshow it
+$("#modalClose").on("click", returnForm);
+
+
+//Validate The Inputs, Selects, and Textarea's
 function formChangeCheck(e) {
   let a = e.target;
   switch (a.tagName) {
     case "INPUT":
       let inputValid;
-      let inputTemp;
       if (!a.checkValidity()) {
         inputValid = false;
       } else {
         inputValid = true;
       }
-      inputTemp = validInput[a.id];
       validInput[a.id] = inputValid;
-      if (inputTemp === validInput[a.id]) {
-        break;
-      } else if (validInput[a.id] === true) {
+      if (validInput[a.id] === true) {
         if (a.id === "domain") {
           document.getElementById(a.id + "Error").classList.add("hidden");
           break;
         }
         document.getElementById(a.id + "Error").classList.add("hidden");
-        numValid++;
-        prog.value = numValid;
       } else {
         if (a.id === "domain") {
           document.getElementById(a.id + "Error").classList.remove("hidden");
           break;
         }
         document.getElementById(a.id + "Error").classList.remove("hidden");
-        numValid--;
-        prog.value = numValid;
-
       }
       break;
       //END INPUT CASE
 
     case "SELECT":
       let selectValid;
-      let selectTemp;
       if (!a.checkValidity()) {
         selectValid = false;
       } else {
         selectValid = true;
       }
-      selectTemp = validInput[a.id];
       validInput[a.id] = selectValid;
-      if (selectTemp === validInput[a.id]) {
-        for (let j = 0; j < colSel.length; j++) {
-          colArr[j] = colSel.item(j).label;
-        }
-        break;
-      } else if (validInput[a.id] === true) {
+      if (validInput[a.id] === true) {
         document.getElementById(a.id + "Error").classList.add("hidden");
-        numValid++;
-        prog.value = numValid;
         for (let j = 0; j < colSel.length; j++) {
           colArr[j] = colSel.item(j).label;
         }
       } else {
         document.getElementById(a.id + "Error").classList.add("hidden");
-        numValid--;
-        prog.value = numValid;
       }
       break;
       //END SELECT CASE
 
     case "TEXTAREA":
       let taValid;
-      let taTemp;
       if (e.target.value.length < 5 || a.value.length > 100) {
         taValid = false;
       } else {
         taValid = true;
       }
-      taTemp = validInput[a.id];
       validInput[a.id] = taValid;
-      if (taTemp === validInput[a.id]) {
-        break;
-      } else if (validInput[a.id] === true) {
+      if (validInput[a.id] === true) {
         document.getElementById(a.id + "Error").classList.add("hidden");
-        numValid++;
-        prog.value = numValid;
       } else {
         document.getElementById(a.id + "Error").classList.remove("hidden");
-        numValid--;
-        prog.value = numValid;
       }
       //END TEXTAREA CASE
   } //END SWITCH
+
+  //Set Progress Bar Value
+  prog.value = Object.values(validInput).filter(v => v === true).length;
 }
 
+//Check Textarea wordcount
 function storyCount() {
   charCount.textContent = this.value.length;
   if (this.value.length > 100) {
@@ -139,6 +119,7 @@ function storyCount() {
   }
 }
 
+//AJAX submission, puts the data into JSON
 function submit() {
   let xmlhttp;
   xmlhttp = new XMLHttpRequest();
@@ -157,8 +138,8 @@ function submit() {
   xmlhttp.send(JSON.stringify(data));
 }
 
+//resets the form progression, character count, and valid inputs
 function reset() {
-  numValid = 0;
   charCount.textContent = 0;
   prog.value = 0;
   validInput = {
@@ -170,13 +151,29 @@ function reset() {
   };
 }
 
+//on modal close reset and reshow the form
+function returnForm() {
+  $("#exampleModal").modal('hide');
+  document.getElementById("questionForm").classList.remove("hidden");
+  document.getElementById("questionForm").reset();
+  charCount.textContent = 0;
+  prog.value = 0;
+  validInput = {
+    flower: false,
+    domain: false,
+    quantity: false,
+    colors: false,
+    story: false
+  };
+}
+
+//if AJAX submit success: display data, if error show what needs to be fixed
 function done() {
   document.getElementById("status").textContent = this.status;
   let jResponse = JSON.parse(this.response);
   if (jResponse.success) {
     document.getElementById("questionForm").classList.add("hidden");
-    document.getElementById("formSuccess").classList.remove("hidden");
-    document.getElementById("formFail").classList.add("hidden");
+    $("#exampleModal").modal('show');
     document.getElementById("subFlower").textContent = data.flower;
     document.getElementById("subDomain").textContent = data.domain;
     document.getElementById("subNumber").textContent = data.quantity;
