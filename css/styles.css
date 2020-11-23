@@ -1,0 +1,178 @@
+body {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0 auto;
+  color: black;
+  background-image: url("https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.entryTime {
+  color: #2638c0;
+}
+.taskItem {
+  border-radius: 10px;
+  border: black solid 1px;
+  min-height: 55px;
+  color: black;
+  margin: auto;
+  padding: 15px;
+  margin-bottom: 15px;
+  transition: background-color .2s ease-out;
+}
+.taskItem:last-child {
+  margin-bottom: -30px;
+}
+.entryNum {
+  float: left;
+  font-weight: bold;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  color: black;
+  background: #13293D;
+  overflow-y: hidden;
+}
+
+section {
+  flex-grow: 1;
+  padding: 20px;
+  padding-top: 50px;
+}
+
+.nav-item {
+  color: white;
+}
+
+.nav-item:hover {
+  color: rgb(208, 248, 255);
+}
+
+.navbar-brand {
+  color: white;
+}
+
+.navbar-brand:hover {
+  color: rgb(208, 248, 255);
+}
+
+.bg-primary {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+@media only screen and (min-width: 991.98px) {
+  .col {
+    flex: 1;
+    padding-bottom: 10px;
+  }
+}
+
+@media only screen and (min-width: 991.98px) {
+  .col {
+    flex: 1;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+#sidebarH {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-size: 0.7rem;
+  position: relative;
+  transition: 0.5s;
+  top: 15px;
+}
+
+.sidebar {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 175px;
+  width: 40px;
+  position: fixed;
+  z-index: 1;
+  top: 50%;
+  right: 0;
+  transition: 0.5s;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 10px;
+  color: white;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.unhideSide {
+  width: 400px;
+  height: 175px;
+}
+
+.hideSide {
+  height: 175px;
+  width: 40px;
+}
+
+#todoborder {
+  top: 50%;
+  width: 5px;
+  height: 175px;
+  right: -35px;
+  transition: 0.5s !important;
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(10, 48, 79, 0.2);
+  padding: 15px;
+}
+hr {
+  background-color: white;
+}
+.todoHide {
+  width: 5px !important;
+  height: 175px!important;
+}
+
+.todoShow {
+  width: 400px !important;
+  height: 175px!important;
+  right: -35px!important;
+}
+
+.sidebarLink {
+  color: white;
+  font-size: 0.8rem;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.sidebarLink:hover {
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+}
+.solid {
+  width: 50%;
+}
