@@ -118,7 +118,7 @@ function storyCount() {
     this.classList.add("storyAccept");
   }
 }
-
+ 
 //AJAX submission, puts the data into JSON
 function submit() {
   let xmlhttp;

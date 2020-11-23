@@ -1,6 +1,6 @@
 //sidebar script
 let sideHide = true;
-
+ 
 function toggleSidebar() {
   if (sideHide) {
     document.getElementById("jsSidebar").classList.remove("hideSide");
