@@ -19,13 +19,16 @@ body {
 .colors {
   width: 190px;
 }
-/*
+
 #storyCount {
   color: black;
-  position: relative;
-  bottom: 5px;
-  right: 50px;
-}*/
+  float: right;
+padding: 0.1rem 0 0 0;
+font-size: 0.875rem;
+position: relative;
+top: -30px;
+right: 10px;
+}
 
 
 
@@ -63,9 +66,6 @@ form {
   color: white;
 }
 
-output {
-  font-weight: bold;
-}
 
 #formSuccess {
   background-color: rgba(83, 101, 119, 0.85);
