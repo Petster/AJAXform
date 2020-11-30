@@ -1,4 +1,4 @@
-body { 
+body {
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
@@ -27,4 +27,8 @@ body {
 #root {
   width: 50%;
   margin: auto;
+}
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+    background: white;
 }

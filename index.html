@@ -1,41 +1,147 @@
 <!doctype html>
 <html>
-<head> 
-<meta charset="utf-8">
-<title>JPALMERI JS</title>
-<link href="favicon.ico" rel="icon" type="image/x-icon" />
-<link href="css/reset.css" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link href="css/styles.css" rel="stylesheet">
-<link href="css/index.css" rel="stylesheet">
+
+<head>
+  <meta charset="utf-8">
+  <title>JPALMERI JS</title>
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+  <link href="css/reset.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link href="css\fullpage.css" rel="stylesheet">
+  <link href="css\form.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
 </head>
+
 <body>
-<header class="header">
+  <!--<header class="header">
     <nav class="navbar navbar-expand-lg bg-primary">
-  <a class="navbar-brand" href="index.html">JPalmeri</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="form.html">Form</a>
+      <a class="navbar-brand" href="index.html">JPalmeri</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="form.html">Form</a>
+        </div>
+      </div>
+    </nav>
+  </header>-->
+
+  <div id="fullpage">
+    <div class="section">
+      <div class="bg-text">
+        <h1 id="homeBanner" class="text-center type-effect"></h1>
+      </div>
+    </div>
+    <div class="section">
+      <div class="row">
+        <div class="col-5 mx-auto text-center">
+          <div id="formBorder" class="mx-auto ">
+            <form id="questionForm" class="text-center" action="https://www.nashuaweb.net/submit-json.php" method="post" novalidate>
+              <h3 id="formFail" class="hidden">You are missing Required Fields!</h3>
+              <legend>Questionnaire</legend>
+              <progress id="progbar" value="0" max="5"></progress>
+              <fieldset>
+                <div class="row text-left">
+                  <div class="col">
+                    <div class="block">
+                      <label for="flower">Flower*</label>
+                      <input class="form-control" required type="text" id="flower" name="flower" pattern="[^0-9]{4,64}$" title="Only Words containing 3 to 64 letters are allowed" placeholder="Rose">
+                      <br><span id="flowerError" class="hidden">Please Enter a Flower name with at least 4 characters. No Numbers</span>
+                    </div>
+                    <div class="block cb">
+                      <label>Option <input type="checkbox" id="option" name="option"></label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="block">
+                      <label for="colors">Colors*</label>
+                      <select class="colors" id="colors" data-placeholder="Choose some colors" multiple name="colors[]" required title="Select Atleast 1 Color">
+                        <option value="red">red</option>
+                        <option value="blue">blue</option>
+                        <option value="yellow">yellow</option>
+                        <option value="orange">orange</option>
+                        <option value="white">white</option>
+                        <option value="pink">pink</option>
+                        <option value="purple">purple</option>
+                      </select>
+                      <br><span id="colorsError" class="hidden">Please choose at least 1 color.</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row text-left">
+                  <div class="col">
+                    <div class="block">
+                      <label for="domain">Domain</label>
+                      <input required class="form-control" type="text" id="domain" title="Only URLs Are Accepted, http:// Not Allowed"
+                        pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" name="domain" placeholder="www.example.com">
+                      <br><span id="domainError" class="hidden">Please Enter a Valid URL starting with www</span>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="block">
+                      <label for="number">Number*</label>
+                      <input class="form-control" required type="number" id="quantity" name="quantity" min="0" max="131" pattern="/d" title="Enter a Number Between 0 and 131">
+                      <br><span id="quantityError" class="hidden">Please Enter a Number between 0 and 131</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="block rb">
+                  <label>Answer</label>
+                  <label><input type="radio" name="rb-answer" value="no" checked>No</label>
+                  <label><input type="radio" name="rb-answer" value="maybe">Maybe</label>
+                  <label><input type="radio" name="rb-answer" value="yes">Yes</label>
+                </div>
+                <div class="block text-left">
+                  <label for="story" class="d-inline-block w-100">Story*</label>
+                  <textarea minlength="5" required="" id="story" title="Please write a story that is atleast 5 letters long" name="story" class="storyAccept"></textarea>
+                  <span id="storyCount" class=""><output id="char-count">0</output>/100</span>
+
+                  <span id="storyError" class="hidden">Please write a story with at least 5 letters.</span>
+                </div>
+              </fieldset>
+              <div class="buttons">
+                <button id="subbtn" class="btn btn-primary border border-secondary" type="button">Go</button>
+                <button id="resbtn" class="btn btn-danger border border-secondary" type="reset">Reset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</nav>
-</header>
-<section>
-<section>
-
-            <div class="bg-text">
-                <h1 class="text-center">JPalmeri's Ajax Form</h1>
-            </div>
-
-</section>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-<!-- react -->
-<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
-<script src="js/main.js"></script>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Form Successfully Submitted</h5>
+        </div>
+        <div class="modal-body">
+          <p>Response Code: <output id="status"></output></p>
+          <p>Flower: <output id="subFlower"></output></p>
+          <p>Domain: <output id="subDomain"></output></p>
+          <p>Number: <output id="subNumber"></output></p>
+          <p>Colors: <output id="subColors"></output></p>
+          <p>Story: <output id="subStory"></output></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="modalClose" data-dismiss="modal">Finish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
+  <script src="js\fullpage.js"></script>
+  <script src="js\formValid.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  //new TypeIt('#homeBanner').type("JPalmeri's Ajax Form").go();
+  new TypeIt('#homeBanner', {
+    startDelay: 300
+  }).type("jpalmeri", {delay: 50}).move(-6).delete(2).type("JP").move(6).type("'s <strong>Ajax Form</strong>").go();
+  </script>
 </body>
 </html>

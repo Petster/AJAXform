@@ -118,7 +118,7 @@ function storyCount() {
     this.classList.add("storyAccept");
   }
 }
- 
+
 //AJAX submission, puts the data into JSON
 function submit() {
   let xmlhttp;
@@ -154,6 +154,7 @@ function reset() {
 //on modal close reset and reshow the form
 function returnForm() {
   $("#exampleModal").modal('hide');
+  fullpage_api.setAllowScrolling(true);
   document.getElementById("questionForm").classList.remove("hidden");
   document.getElementById("questionForm").reset();
   charCount.textContent = 0;
@@ -174,6 +175,7 @@ function done() {
   if (jResponse.success) {
     document.getElementById("questionForm").classList.add("hidden");
     $("#exampleModal").modal('show');
+    fullpage_api.setAllowScrolling(false);
     document.getElementById("subFlower").textContent = data.flower;
     document.getElementById("subDomain").textContent = data.domain;
     document.getElementById("subNumber").textContent = data.quantity;
